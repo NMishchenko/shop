@@ -1,3 +1,4 @@
-<p>Name: {{product.name}}</p>
-<p>Price: {{product.price}}</p>
+<p>Name: {{cartItem.product.name}}</p>
+<p>Quantity: {{cartItem.quantity}}</p>
+<p>Price: {{getTotalPrice()}}</p>
 <button (click)="onRemoveFromCart()">Remove</button>

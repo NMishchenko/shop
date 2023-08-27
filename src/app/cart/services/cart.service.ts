@@ -1,47 +1,55 @@
 import { Injectable } from '@angular/core';
 
-import { ProductModel } from 'src/app/products/models/product.model';
 import { ProductService } from 'src/app/products/services/product.service';
+import { CartItemModel } from '../models/cart-item.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private products: ProductModel[] = [];
+  private cartItems: CartItemModel[] = [];
   
   constructor(
     private productService: ProductService
   ) { }
 
-  getProducts(): ProductModel[] {
-    return this.products;
+  getCartItems(): CartItemModel[] {
+    return this.cartItems;
   }
 
   getTotalCost(): number {
-    const totalCost = this.products.reduce((sum, product) => sum + product.price, 0);
+    const totalCost = this.cartItems.reduce((costSum, cartItem) => {
+      return costSum + cartItem.product.price * cartItem.quantity;
+    }, 0);
     return Math.round(totalCost * 100) / 100;
   }
 
   getTotalQuantity(): number {
-    return this.products.length;
+    const totalQuantity = this.cartItems.reduce((quantitySum, cartItem) => quantitySum + cartItem.quantity, 0);
+    return totalQuantity;
   }
 
-  addCartItem(name: string) {
-    const item = this.productService.getProductByName(name);
-    
-    if (item) {
-      this.products.push(item);
+  addCartItem(name: string): void {
+    const product = this.productService.getProductByName(name);
+    if (!product) return;
+
+    let cartItem = this.cartItems.find(cartItem => cartItem.product == product);
+    if (cartItem) {
+      cartItem.quantity++;
+    }
+    else {
+      cartItem = new CartItemModel(product, 1);
+      this.cartItems.push(cartItem);
     }
   }
 
-  removeCartItem(name: string) {
-    const item = this.productService.getProductByName(name);
-    
-    if (item) {
-      const cartItemIndex = this.products.findIndex(product => product.name == name);
+  removeCartItem(name: string): void {
+    const product = this.productService.getProductByName(name);
+    if (!product) return;
 
-      if (cartItemIndex !== -1)
-        this.products.splice(cartItemIndex, 1);
-    }
+    const cartItemIndex = this.cartItems.findIndex(cartItem => cartItem.product.name == name);
+
+    if (cartItemIndex !== -1)
+      this.cartItems.splice(cartItemIndex, 1);
   }
 }

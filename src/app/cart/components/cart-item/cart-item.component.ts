@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProductModel } from 'src/app/products/models/product.model';
+import { CartItemModel } from '../../models/cart-item.model';
 
 @Component({
   selector: 'app-cart-item',
@@ -11,11 +11,16 @@ import { ProductModel } from 'src/app/products/models/product.model';
   styleUrls: ['./cart-item.component.scss']
 })
 export class CartItemComponent {
-  @Input() product!: ProductModel;
+  @Input() cartItem!: CartItemModel;
 
   @Output() removeCartItemEvent = new EventEmitter<string>();
 
   onRemoveFromCart(): void {
-    this.removeCartItemEvent.emit(this.product.name);
+    this.removeCartItemEvent.emit(this.cartItem.product.name);
+  }
+
+  getTotalPrice(): number {
+    const totalPrice = this.cartItem.product.price * this.cartItem.quantity;
+    return Math.round(totalPrice * 100) / 100;
   }
 }
