@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductModel } from 'src/app/products/models/product.model';
-import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -13,8 +12,9 @@ import { CartService } from '../../services/cart.service';
 })
 export class CartItemComponent {
   @Input() product!: ProductModel;
+  @Output() removeCartItemEvent = new EventEmitter<string>();
 
-  constructor(
-    public cartService: CartService
-  ) {}
+  onRemoveFromCart(): void {
+    this.removeCartItemEvent.emit(this.product.name);
+  }
 }

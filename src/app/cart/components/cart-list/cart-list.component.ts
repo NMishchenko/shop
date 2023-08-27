@@ -17,8 +17,12 @@ export class CartListComponent {
   products!: ProductModel[];
 
   constructor(
-    cartService: CartService
+    private cartService: CartService
   ) {
     this.products = cartService.getProducts();
+  }
+
+  removeFromCart(productName: string): void {
+    this.cartService.removeCartItem(productName);
   }
 }
