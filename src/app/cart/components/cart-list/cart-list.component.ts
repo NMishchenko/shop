@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProductModel } from 'src/app/products/models/product.model';
 import { ProductComponent } from "../../../products/components/product/product.component";
 import { CartItemComponent } from "../cart-item/cart-item.component";
 import { CartService } from '../../services/cart.service';
+import { CartItemModel } from '../../models/cart-item.model';
 
 @Component({
     selector: 'app-cart-list',
@@ -14,11 +14,23 @@ import { CartService } from '../../services/cart.service';
     imports: [CommonModule, ProductComponent, CartItemComponent]
 })
 export class CartListComponent {
-  products!: ProductModel[];
+  cartItems!: CartItemModel[];
 
   constructor(
-    cartService: CartService
+    public cartService: CartService
   ) {
-    this.products = cartService.getProducts();
+    this.cartItems = cartService.getCartItems();
+  }
+
+  removeFromCart(productName: string): void {
+    this.cartService.removeCartItem(productName);
+  }
+
+  decreaseQuantity(productName: string): void {
+    this.cartService.decreaseCartItemQuantity(productName);
+  }
+
+  increaseQuantity(productName: string): void {
+    this.cartService.addCartItem(productName);
   }
 }

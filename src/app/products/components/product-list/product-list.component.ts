@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { ProductComponent } from "../product/product.component";
 import { ProductModel } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
+import { CartService } from 'src/app/cart/services/cart.service';
 
 @Component({
     selector: 'app-product-list',
@@ -15,8 +17,13 @@ export class ProductListComponent {
   products!: ProductModel[];
 
   constructor(
-    productService: ProductService
+    productService: ProductService,
+    private cartService: CartService
   ) {
     this.products = productService.getProducts();
+  }
+
+  addToCart(product: ProductModel): void {
+    this.cartService.addCartItem(product.name);
   }
 }

@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { ProductModel } from '../../models/product.model';
-import { CartService } from 'src/app/cart/services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -12,13 +12,10 @@ import { CartService } from 'src/app/cart/services/cart.service';
 })
 export class ProductComponent {
   @Input() product!: ProductModel;
-
-  constructor(
-    private cartService: CartService
-  ) {}
+  @Output() newCartItemEvent = new EventEmitter<ProductModel>();
 
   onAddToCart(): void {
     console.log(`The product ${this.product.name} is bought`);
-    this.cartService.addCartItem(this.product.name);
+    this.newCartItemEvent.emit(this.product);
   }
 }

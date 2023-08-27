@@ -1,9 +1,18 @@
-<div *ngIf="products.length > 0; else emptyCart">
+<div *ngIf="cartItems.length > 0; else emptyCart">
     <hr>
-    <div *ngFor="let product of products">
-        <app-cart-item [product]="product"></app-cart-item>
+    <div *ngFor="let cartItem of cartItems">
+        <app-cart-item
+            (removeCartItemEvent)="removeFromCart(cartItem.product.name)"
+            (decreaseQuantity)="decreaseQuantity(cartItem.product.name)"
+            (increaseQuantity)="increaseQuantity(cartItem.product.name)"
+            [cartItem]="cartItem"></app-cart-item>
         <hr>
     </div>
+    <div class="cart-total">
+        <p>Quantity: {{this.cartService.getTotalQuantity()}}</p>
+        <p>Total cost: {{this.cartService.getTotalCost()}}</p>
+    </div>
+    <hr>
 </div>
 <ng-template #emptyCart>
     <div class="empty-cart">

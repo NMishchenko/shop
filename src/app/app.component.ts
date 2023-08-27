@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { NgSwitch, NgSwitchDefault, NgSwitchCase } from '@angular/common';
 
 import { FirstComponent } from './first/first.component';
@@ -12,6 +12,12 @@ import { CartListComponent } from "./cart/components/cart-list/cart-list.compone
     standalone: true,
     imports: [NgSwitch, NgSwitchDefault, NgSwitchCase, FirstComponent, ProductListComponent, CartListComponent]
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
+  @ViewChild('appTitle') private childComponentRef!: ElementRef<HTMLHeadingElement>;
+
   title = 'shop';
+
+  ngAfterViewInit(): void {
+    this.childComponentRef.nativeElement.textContent = "Sus Shop";
+  }
 }
