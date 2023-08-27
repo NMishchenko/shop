@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { ProductModel } from 'src/app/products/models/product.model';
 import { CartService } from '../../services/cart.service';
 

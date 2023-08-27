@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { ProductComponent } from "../product/product.component";
 import { ProductModel } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
