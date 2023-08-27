@@ -1,7 +1,11 @@
 <div *ngIf="cartItems.length > 0; else emptyCart">
     <hr>
     <div *ngFor="let cartItem of cartItems">
-        <app-cart-item (removeCartItemEvent)="removeFromCart(cartItem.product.name)" [cartItem]="cartItem"></app-cart-item>
+        <app-cart-item
+            (removeCartItemEvent)="removeFromCart(cartItem.product.name)"
+            (decreaseQuantity)="decreaseQuantity(cartItem.product.name)"
+            (increaseQuantity)="increaseQuantity(cartItem.product.name)"
+            [cartItem]="cartItem"></app-cart-item>
         <hr>
     </div>
     <div class="cart-total">

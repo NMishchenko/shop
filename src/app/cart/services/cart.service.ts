@@ -52,4 +52,14 @@ export class CartService {
     if (cartItemIndex !== -1)
       this.cartItems.splice(cartItemIndex, 1);
   }
+
+  decreaseCartItemQuantity(name: string): void {
+    const product = this.productService.getProductByName(name);
+    if (!product) return;
+
+    let cartItem = this.cartItems.find(cartItem => cartItem.product.name == name);
+    if (!cartItem) return;
+
+    cartItem.quantity--;
+  }
 }

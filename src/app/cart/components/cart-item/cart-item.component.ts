@@ -14,9 +14,20 @@ export class CartItemComponent {
   @Input() cartItem!: CartItemModel;
 
   @Output() removeCartItemEvent = new EventEmitter<string>();
+  @Output() decreaseQuantity = new EventEmitter<string>();
+  @Output() increaseQuantity = new EventEmitter<string>();
 
   onRemoveFromCart(): void {
     this.removeCartItemEvent.emit(this.cartItem.product.name);
+  }
+
+  onQuantityDecrease(): void {
+    if (this.cartItem.quantity > 1)
+      this.decreaseQuantity.emit(this.cartItem.product.name);
+  }
+
+  onQuantityIncrease(): void {
+    this.increaseQuantity.emit(this.cartItem.product.name);
   }
 
   getTotalPrice(): number {

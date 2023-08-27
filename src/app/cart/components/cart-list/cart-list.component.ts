@@ -25,4 +25,12 @@ export class CartListComponent {
   removeFromCart(productName: string): void {
     this.cartService.removeCartItem(productName);
   }
+
+  decreaseQuantity(productName: string): void {
+    this.cartService.decreaseCartItemQuantity(productName);
+  }
+
+  increaseQuantity(productName: string): void {
+    this.cartService.addCartItem(productName);
+  }
 }

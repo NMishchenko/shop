@@ -1,4 +1,8 @@
 <p>Name: {{cartItem.product.name}}</p>
-<p>Quantity: {{cartItem.quantity}}</p>
+<div class="quantity">
+    <p>Quantity: {{cartItem.quantity}}</p>
+    <button (click)="onQuantityIncrease()">+</button>
+    <button (click)="onQuantityDecrease()" *ngIf="cartItem.quantity > 1">-</button>
+</div>
 <p>Price: {{getTotalPrice()}}</p>
 <button (click)="onRemoveFromCart()">Remove</button>
