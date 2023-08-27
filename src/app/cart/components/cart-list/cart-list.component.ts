@@ -17,7 +17,7 @@ export class CartListComponent {
   products!: ProductModel[];
 
   constructor(
-    private cartService: CartService
+    public cartService: CartService
   ) {
     this.products = cartService.getProducts();
   }

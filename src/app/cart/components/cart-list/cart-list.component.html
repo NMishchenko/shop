@@ -4,6 +4,11 @@
         <app-cart-item (removeCartItemEvent)="removeFromCart(product.name)" [product]="product"></app-cart-item>
         <hr>
     </div>
+    <div class="cart-total">
+        <p>Quantity: {{this.cartService.getTotalQuantity()}}</p>
+        <p>Total cost: {{this.cartService.getTotalCost()}}</p>
+    </div>
+    <hr>
 </div>
 <ng-template #emptyCart>
     <div class="empty-cart">

@@ -17,6 +17,15 @@ export class CartService {
     return this.products;
   }
 
+  getTotalCost(): number {
+    const totalCost = this.products.reduce((sum, product) => sum + product.price, 0);
+    return Math.round(totalCost * 100) / 100;
+  }
+
+  getTotalQuantity(): number {
+    return this.products.length;
+  }
+
   addCartItem(name: string) {
     const item = this.productService.getProductByName(name);
     

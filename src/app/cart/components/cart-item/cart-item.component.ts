@@ -12,6 +12,7 @@ import { ProductModel } from 'src/app/products/models/product.model';
 })
 export class CartItemComponent {
   @Input() product!: ProductModel;
+
   @Output() removeCartItemEvent = new EventEmitter<string>();
 
   onRemoveFromCart(): void {
