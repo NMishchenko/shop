@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CartItemModel } from '../../models/cart-item.model';
+import { HighlightDirective } from 'src/app/shared/highlight.directive';
 
 @Component({
   selector: 'app-cart-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HighlightDirective],
   templateUrl: './cart-item.component.html',
   styleUrls: ['./cart-item.component.scss']
 })
