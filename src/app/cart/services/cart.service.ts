@@ -17,14 +17,14 @@ export class CartService {
     return this.cartItems;
   }
 
-  getTotalCost(): number {
+  get totalCost(): number {
     const totalCost = this.cartItems.reduce((costSum, cartItem) => {
       return costSum + cartItem.product.price * cartItem.quantity;
     }, 0);
     return Math.round(totalCost * 100) / 100;
   }
 
-  getTotalQuantity(): number {
+  get totalQuantity(): number {
     const totalQuantity = this.cartItems.reduce((quantitySum, cartItem) => quantitySum + cartItem.quantity, 0);
     return totalQuantity;
   }
@@ -61,5 +61,14 @@ export class CartService {
     if (!cartItem) return;
 
     cartItem.quantity--;
+  }
+
+  removeAllCartItems(): void {
+    this.cartItems.splice(0);
+  }
+
+  isEmptyCart(): boolean {
+    console.log(this.cartItems.length == 0);
+    return this.cartItems.length == 0;
   }
 }

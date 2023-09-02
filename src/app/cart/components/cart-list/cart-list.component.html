@@ -1,3 +1,4 @@
+<!-- HACK: Replace this ngIf condition by cartService.isEmptyCart -->
 <div *ngIf="cartItems.length > 0; else emptyCart">
     <hr>
     <div *ngFor="let cartItem of cartItems">
@@ -9,8 +10,8 @@
         <hr>
     </div>
     <div class="cart-total">
-        <p>Quantity: {{this.cartService.getTotalQuantity()}}</p>
-        <p>Total cost: {{this.cartService.getTotalCost()}}</p>
+        <p>Quantity: {{this.cartService.totalQuantity}}</p>
+        <p>Total cost: {{this.cartService.totalCost}}</p>
     </div>
     <hr>
 </div>
