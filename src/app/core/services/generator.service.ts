@@ -1,10 +1,12 @@
 import { Injectable, InjectionToken } from '@angular/core';
+import { generateNewId } from './gen-id.generator';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeneratorService {
   private avaliableSymbols: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  private newIdGenerator: Generator<number> = generateNewId();
 
   generate(stringLength: number): string {
     let generatedString = "";
@@ -15,6 +17,10 @@ export class GeneratorService {
     }
 
     return generatedString;
+  }
+
+  getNewId(): number {
+    return this.newIdGenerator.next().value;
   }
 }
 
