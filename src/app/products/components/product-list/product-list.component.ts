@@ -20,6 +20,7 @@ export class ProductListComponent {
     productService: ProductService,
     private cartService: CartService
   ) {
+    // эту операцию можно было бы выполнить в ngOnInit
     this.products = productService.getProducts();
   }
 
