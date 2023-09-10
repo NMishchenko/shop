@@ -1,7 +1,16 @@
+<div class="form-group">
+    <p>Sort field</p>
+    <select (change)="onSortOptionChanged(sortOptionsSelect.value)" #sortOptionsSelect>
+        <option *ngFor="let sortOption of sortOptions">{{ sortOption }}</option>
+    </select>
+    <p>Ascending</p>
+    &nbsp;
+    <input type="checkbox" (change)="onAscendingCheckboxChanged(ascendingCheckbox.checked)" #ascendingCheckbox>
+</div>
 <!-- HACK: Replace this ngIf condition by cartService.isEmptyCart -->
 <div *ngIf="cartItems.length > 0; else emptyCart">
     <hr>
-    <div *ngFor="let cartItem of cartItems">
+    <div *ngFor="let cartItem of (cartItems | orderBy : currentSortOption : currentIsAscending)">
         <app-cart-item
             (removeCartItemEvent)="removeFromCart(cartItem.product.name)"
             (decreaseQuantity)="decreaseQuantity(cartItem.product.name)"

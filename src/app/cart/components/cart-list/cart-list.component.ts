@@ -5,16 +5,20 @@ import { ProductComponent } from "../../../products/components/product/product.c
 import { CartItemComponent } from "../cart-item/cart-item.component";
 import { CartService } from '../../services/cart.service';
 import { CartItemModel } from '../../models/cart-item.model';
+import { OrderByPipe } from "../../../shared/pipes/order-by.pipe";
 
 @Component({
     selector: 'app-cart-list',
     standalone: true,
     templateUrl: './cart-list.component.html',
     styleUrls: ['./cart-list.component.scss'],
-    imports: [CommonModule, ProductComponent, CartItemComponent]
+    imports: [CommonModule, ProductComponent, CartItemComponent, OrderByPipe]
 })
 export class CartListComponent {
+  sortOptions: string[] = ["none", "product.price", "quantity", "product.name"];
   cartItems!: CartItemModel[];
+  currentSortOption: string = this.sortOptions[0];
+  currentIsAscending: boolean = false;
 
   constructor(
     public cartService: CartService
@@ -32,5 +36,13 @@ export class CartListComponent {
 
   increaseQuantity(productName: string): void {
     this.cartService.addCartItem(productName);
+  }
+
+  onSortOptionChanged(sortOption: string): void {
+    this.currentSortOption = sortOption;
+  }
+
+  onAscendingCheckboxChanged(isAscending: boolean): void {
+    this.currentIsAscending = isAscending;
   }
 }
