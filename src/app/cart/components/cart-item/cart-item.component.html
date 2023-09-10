@@ -5,6 +5,6 @@
         <button (click)="onQuantityIncrease()">+</button>
         <button (click)="onQuantityDecrease()" *ngIf="cartItem.quantity > 1">-</button>
     </div>
-    <p>Price: {{getTotalPrice()}}</p>
+    <p>Price: {{getTotalPrice() | currency: 'USD'}}</p>
     <button (click)="onRemoveFromCart()">Remove</button>
 </div>

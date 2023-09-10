@@ -5,6 +5,7 @@ import { ProductComponent } from "../product/product.component";
 import { ProductModel } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { CartService } from 'src/app/cart/services/cart.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-product-list',
@@ -14,7 +15,7 @@ import { CartService } from 'src/app/cart/services/cart.service';
     imports: [CommonModule, ProductComponent]
 })
 export class ProductListComponent {
-  products!: ProductModel[];
+  products!: Observable<ProductModel[]>;
 
   constructor(
     productService: ProductService,

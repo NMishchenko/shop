@@ -34,6 +34,6 @@ export class CartItemComponent {
 
   getTotalPrice(): number {
     const totalPrice = this.cartItem.product.price * this.cartItem.quantity;
-    return Math.round(totalPrice * 100) / 100;
+    return totalPrice;
   }
 }
