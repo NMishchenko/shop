@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ProductModel } from '../models/product.model';
 import { Category } from 'src/app/shared/models/category.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class ProductService {
 
   constructor() { }
 
-  getProducts(): ProductModel[] {
-    return this.products;
+  getProducts(): Observable<ProductModel[]> {
+    return of(this.products);
   }
 
   getProductByName(name: string): ProductModel | undefined {
