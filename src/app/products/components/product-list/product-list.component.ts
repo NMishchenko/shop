@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, type OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductComponent } from "../product/product.component";
@@ -14,14 +14,17 @@ import { Observable } from 'rxjs';
     styleUrls: ['./product-list.component.scss'],
     imports: [CommonModule, ProductComponent]
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit{
   products!: Observable<ProductModel[]>;
 
   constructor(
-    productService: ProductService,
+    private productService: ProductService,
     private cartService: CartService
   ) {
-    this.products = productService.getProducts();
+  }
+
+  ngOnInit(): void {
+    this.products = this.productService.getProducts();
   }
 
   addToCart(product: ProductModel): void {
